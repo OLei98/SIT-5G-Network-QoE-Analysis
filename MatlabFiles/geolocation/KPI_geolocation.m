@@ -8,7 +8,7 @@ data = readtable(filePath, 'VariableNamingRule', 'preserve'); % Load the table f
 latId = 'Lat';       % Column name or index for Latitude
 lonId = 'Long';      % Column name or index for Longitude
 
-pId = 'Network Thrpt UL';
+pId = 'PCI';
 tstr = ''; % Title string
 clim = [min(data{:,pId}), max(data{:,pId})];          % Color bar limits (e.g., RSRP in dBm)
 
@@ -30,12 +30,7 @@ function gplotCol(data, latId, lonId, pId, tstr, clim)
     saveDir = 'C:\Users\MNT\Desktop\OCL_DEMO\GitHub\SIT-5G-Network-QoE-Analysis\MatlabFiles\geolocation_results';
     saveFileName = strcat(data.Properties.VariableNames{pId}, '_Visualization.png'); % Dynamic name based on pId
     saveFile = fullfile(saveDir, saveFileName);
-
-    % Save the figure as a file
     saveas(gcf, saveFile);  % Save as PNG
     % exportgraphics(gcf, saveFile, 'Resolution', 300); % High-res option (optional)
      
-    % Save the figure as a file
-    saveas(gcf, 'RSRP_Visualization.png');  % Save as PNG
-    % exportgraphics(gcf, 'RSRP_Visualization.png', 'Resolution', 300); % High-res option (optional)
 end
