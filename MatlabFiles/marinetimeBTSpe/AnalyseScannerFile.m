@@ -4,7 +4,7 @@ close all
 
 %% analyse scanner data
 % filename = 'C:\Users\A103764\OneDrive - Singapore Institute Of Technology\Vignesh_OneDrive\QualipocScannerResults\ScannerResult\Example\5G_24.2_test.txt';
-filenameScanner = 'C:\Users\cheny\Desktop\SIT folder\Intern\MNT@SiT\06Jan25_RS_SIT_Romes_measurement\RS_SIT_part1.txt';
+filenameScanner = 'C:\Users\MNT\Desktop\OCL_DEMO\GitHub\SIT-5G-Network-QoE-Analysis\ReferenceCode\RS_SIT_PordAreas\scanner_btspe_raw\R&S_SIT_1.txt';
 dataScanner = readtable(filenameScanner, 'Delimiter', ';');
 
 %Scanner gNB
@@ -44,8 +44,8 @@ percentageOverlap = (length(pciFound) / length(pciScannerUniq)) * 100;
 %% analyse data from export2csv extract for m1
 
 % readtable
-dataMone1 = readtable('C:\Users\cheny\Desktop\SIT folder\Intern\MNT@SiT\SIT_QualiPoc_M1\2024-12-10-10-03-38-0000--007-4384-2898-S.csv', 'VariableNamingRule', 'preserve'); % Load a table from a CSV file
-dataMone2 = readtable('C:\Users\cheny\Desktop\SIT folder\Intern\MNT@SiT\SIT_QualiPoc_M1\2024-12-10-10-54-18-0000--007-4384-2898-S.csv', 'VariableNamingRule', 'preserve'); % Load a table from a CSV file
+dataMone1 = readtable('C:\Users\MNT\Desktop\OCL_DEMO\GitHub\SIT-5G-Network-QoE-Analysis\ReferenceCode\MarinaSouthPiers\M1\2024-12-10-10-03-38-0000--007-4384-2898-S.csv', 'VariableNamingRule', 'preserve'); % Load a table from a CSV file
+dataMone2 = readtable('C:\Users\MNT\Desktop\OCL_DEMO\GitHub\SIT-5G-Network-QoE-Analysis\ReferenceCode\MarinaSouthPiers\M1\2024-12-10-10-54-18-0000--007-4384-2898-S.csv', 'VariableNamingRule', 'preserve'); % Load a table from a CSV file
 
 % table from qualipoc 
 dataMone = [dataMone1; dataMone2];
@@ -90,3 +90,15 @@ for i = 1:height(dataMone)
         dataMone.gNB_Long(i) = TableScanner.Longitude(matchIndex);
     end
 end
+
+% Define the folder and file name
+outputFolder = 'output_data'; % Replace with your desired folder name
+outputFileName = 'dataMone_updated.mat'; % Replace with your desired file name
+
+% Create the folder if it does not exist
+if ~exist(outputFolder, 'dir')
+    mkdir(outputFolder);
+end
+
+% Save the file in the specified folder
+save(fullfile(outputFolder, outputFileName), 'dataMone');
