@@ -27,7 +27,7 @@ TableScanner = table(pciScanner, latitudes, longitudes, 'VariableNames', {'PCI',
 
 % find unique values 
 %data_Singtel = readtable('C:\Users\cheny\Desktop\SIT folder\Intern\MNT@SiT\MarineTime_Marina_SouthPier\MarineTime_Singtel.csv', 'VariableNamingRule', 'preserve'); % Load a table from a CSV file
-data_Singtel = readtable('C:\Users\MNT\Desktop\OCL_DEMO\GitHub\SIT-5G-Network-QoE-Analysis\ReferenceCode\MarinaSouthPiers\Singtel\Singtel_Data.csv', 'VariableNamingRule', 'preserve'); % Load a table from a CSV file
+data_Singtel = readtable('C:\Users\MNT\Desktop\OCL_DEMO\GitHub\SIT-5G-Network-QoE-Analysis\ReferenceCode\MarinaSouthPiers\Singtel\MarineTime_Singtel.csv', 'VariableNamingRule', 'preserve'); % Load a table from a CSV file
 head(data_Singtel);
 
 pciSingtel = data_Singtel.PCI; 
@@ -91,14 +91,15 @@ for i = 1:height(dataMone)
     end
 end
 
-% Define the folder and file name
-outputFolder = 'output_data'; % Replace with your desired folder name
-outputFileName = 'dataMone_updated.mat'; % Replace with your desired file name
+%% Define the folder and file name
+outputFolder = 'C:\Users\MNT\Desktop\OCL_DEMO\GitHub\SIT-5G-Network-QoE-Analysis\ReferenceCode\MarinaSouthPiers\M1'; % Replace with your desired folder name
+outputFileName_csv = 'M1_Combined_updated_append_gNB.csv'; % Replace with your desired file name (.mat or csv)
+% outputFileName_mat = 'M1_Combined_updated_append_gNB.mat'; % Replace with your desired file name (.mat or csv)
 
 % Create the folder if it does not exist
 if ~exist(outputFolder, 'dir')
     mkdir(outputFolder);
 end
 
-% Save the file in the specified folder
-save(fullfile(outputFolder, outputFileName), 'dataMone');
+writetable(dataMone, fullfile(outputFolder, outputFileName_csv)); % for csv format
+% save(fullfile(outputFolder, outputFileName_mat), 'dataMone'); %for mat format
